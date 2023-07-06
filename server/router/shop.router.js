@@ -31,6 +31,26 @@ router.get('/', (req, res) => {
 
 
 // PUT route -- change isPurchased status to True
+router.put('/:id', (req, res) => {
+  const idToUpdate = req.params.id
+  const sqlText = `
+    UPDATE "shop"
+    SET "isPurchased" = true
+    WHERE id=$1
+  `
+
+  pool.query(sqlText, [idToUpdate])
+  .then((result) => {
+    
+    res.sendStatus(200)
+  }).catch((err) => {
+    alert('Error Updating "buy" item')
+    res.sendStatus(500)
+  });
+
+
+}) // end PUT - isPurchased update
+
 
 
 // PUT route -- reset ALL isPurchased statuses to False
