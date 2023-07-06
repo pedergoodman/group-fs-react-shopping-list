@@ -16,6 +16,7 @@ function App() {
 
     const [ shoppingList, setShoppingList ] = useState([]);
 
+    // GET request, 
     const getShoppingList = () => {
         axios.get('/shopping-list')
         .then((response) => {
@@ -28,12 +29,28 @@ function App() {
         });
     }; // end getShoppingList
 
-
+    // Initial load of shopping list
     useEffect( () => {
         getShoppingList();
     }, []);
 
 
+    const updatePurchaseStatus = (itemToUpdate) => {
+        
+        axios.put(`/shopping-list/${itemToUpdate}`)
+            .then((response) => {
+                getShoppingList()
+            }).catch((err) => {
+                alert('Error updating purchase');
+                console.log('Error updating purchase', err);
+            });
+    }; // end updatePurchaseStatus
+
+
+
+
+
+    // Build App!
     return (
         <div className="App">
             <Header />
