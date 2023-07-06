@@ -1,15 +1,19 @@
-import React from 'react'
-import { Card, Col } from 'react-bootstrap'
-import {Button} from 'react-bootstrap'
-import './shopItem.css'
-const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
-
-
+import React from "react";
+import { Card, Col } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import "./shopItem.css";
+const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
   const handleBuyButton = () => {
-    console.log('buy button clicked!');
-    updatePurchaseStatus(shoppingItem.id)
-  } //end handleBuyButton
+    console.log("buy button clicked!");
+    updatePurchaseStatus(shoppingItem.id);
+  }; //end handleBuyButton
 
+  if (shoppingItem.isPurchased == true) {
+  }
+  const handleDelete = () => {
+    removeShopItem(shoppingItem.id);
+    console.log("Remove!");
+  };
 
   let purchaseAreaDisplay = ''
 
@@ -22,23 +26,21 @@ const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
             <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
             </>)
   }
-  
 
   return (
-            <div className='cardDiv'>
-              <Card>
-              <Card.Body>
-              <Card.Title>{shoppingItem.item}</Card.Title>
-              <Card.Text>
-               {shoppingItem.quantity}:{shoppingItem.unit}
-              </Card.Text>
-              <span className='purchaseArea'>
-              {purchaseAreaDisplay}
-              </span>
-            </Card.Body>
-          </Card>
-          </div>
-  )
-}
-
-export default ShopItem
+    <div className="cardDiv">
+      <Card>
+        <Card.Body>
+          <Card.Title>{shoppingItem.item}</Card.Title>
+          <Card.Text>
+            {shoppingItem.quantity}:{shoppingItem.unit}
+          </Card.Text>
+          <span className="purchaseArea">
+           {purchaseAreaDisplay}
+          </span>
+        </Card.Body>
+      </Card>
+    </div>
+  );
+};
+export default ShopItem;

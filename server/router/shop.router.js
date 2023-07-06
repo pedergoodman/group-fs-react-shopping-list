@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
   const sqlShopPost = `INSERT INTO "shop" (item, quantity, unit) VALUES ($1, $2, $3)`;
   const sqlParam = [shop.item, shop.quantity, shop.unit];
   // Query to the database
-  pool.query(sqlShopPost, [shop.item, shop.quantity, shop.unit])
+  pool.query(sqlShopPost, sqlParam)
   .then((result) => {
     console.log('Added item to the shopping list:', shop)
     // Send an - OK Status in Postman
@@ -81,7 +81,19 @@ router.put('/', (req, res) => {
 // PUT route (stretch) -- rename shopping list item
 
 // DELETE route -- remove selected item
+router.delete('/:id', (req, res) => {
+  const shopId = req.params.id;
+  const sqlDelete = `DELETE FROM "shop" WHERE id = $1`;
 
+  pool.query(sqlDelete, [shopId])
+
+  .then((result) => {
+    res.sendStatus(201)
+  }).catch((error) => {
+    console.log(`ERROR in: ${sqlDelete}`, error);
+    res.sendStatus(500);
+  })
+})
 // DElete route -- remove all items!
 
 module.exports = router;
