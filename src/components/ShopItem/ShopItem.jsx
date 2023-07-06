@@ -1,28 +1,25 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Col } from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
-import {Row} from 'react-bootstrap'
-import {Col} from 'react-bootstrap'
-const ShopItem = () => {
+const ShopItem = ({shoppingItem}) => {
+
+  if (shoppingItem.isPurchased == true) {
+      
+  }
+
   return (
-    <>
-   <Row xs={2} md={3} className="g-4">
-      {Array.from({ length: 3 }).map((_, idx) => (
-        <Col key={idx}>
-          <Card>
-            <Card.Body>
-              <Card.Title>Item Name</Card.Title>
+              <Card>
+              <Card.Body>
+              <Card.Title>{shoppingItem.item}</Card.Title>
               <Card.Text>
-               {} Unit: Item{}
+               {shoppingItem.quantity}:{shoppingItem.unit}
               </Card.Text>
+              <span className='purchaseArea'>
               <Button variant='success'>Buy</Button>
               <Button variant='danger'>Remove</Button>
+              </span>
             </Card.Body>
           </Card>
-        </Col>
-      ))}
-    </Row>
-    </>
   )
 }
 
