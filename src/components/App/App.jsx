@@ -7,7 +7,6 @@ import "./App.css";
 import ShopList from "../ShopList/ShopList.jsx";
 
 function App() {
-  const [shoppingList, setShoppingList] = useState([]);
 
   const getShoppingList = () => {
     axios
@@ -38,9 +37,6 @@ function App() {
         alert("ERROR in POST:", error);
       });
   };
-  useEffect(() => {
-    getShoppingList();
-  }, []);
 
   const updatePurchaseStatus = itemToUpdate => {
     axios
