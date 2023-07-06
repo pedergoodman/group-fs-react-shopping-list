@@ -15,6 +15,18 @@ const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
     console.log("Remove!");
   };
 
+  let purchaseAreaDisplay = ''
+
+
+  if (shoppingItem.isPurchased == true) {
+  purchaseAreaDisplay = (<><p>Purchased!</p>
+            </>)
+  } else {
+  purchaseAreaDisplay = (<><Button variant='success' size="sm" className='buyButton' onClick={handleBuyButton}>Buy</Button>
+            <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
+            </>)
+  }
+
   return (
     <div className="cardDiv">
       <Card>
@@ -24,27 +36,11 @@ const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
             {shoppingItem.quantity}:{shoppingItem.unit}
           </Card.Text>
           <span className="purchaseArea">
-            <Button
-              variant="success"
-              size="sm"
-              className="buyButton"
-              onClick={handleBuyButton}
-            >
-              Buy
-            </Button>
-            <Button
-              variant="danger"
-              size="sm"
-              className="removeButton"
-              onClick={handleDelete}
-            >
-              Remove
-            </Button>
+           {purchaseAreaDisplay}
           </span>
         </Card.Body>
       </Card>
     </div>
   );
 };
-
 export default ShopItem;
