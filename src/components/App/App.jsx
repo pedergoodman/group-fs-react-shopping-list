@@ -22,6 +22,19 @@ function App() {
       });
   }; // end getShoppingList
 
+  const postShoppingList = (addShopItem) => {
+      axios({
+          method:'POST',
+          url:'/shopping-list',
+          data:addShopItem,
+      }).then((response) => {
+          getShoppingList();
+          console.log('Response:',response)
+      }).catch((error) => {
+          console.log('ERROR:',error);
+          alert('ERROR in POST:', error)
+      })
+  };
   useEffect(() => {
     getShoppingList();
   }, []);
@@ -31,7 +44,7 @@ function App() {
       <Header />
       <main>
         <Title title="Add an Item" />
-        <ShopForm />
+        <ShopForm addShopItem={postShoppingList}/>
         <Title title="Shopping List" />
       </main>
     </div>
