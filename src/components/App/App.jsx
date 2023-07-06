@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import axios from 'axios'
 import Header from "../Header/Header.jsx";
 import ShopForm from "../ShopForm/ShopForm.jsx";
 import Title from "../Title/Title.jsx";
@@ -13,7 +13,7 @@ function App() {
       .get("/shopping-list")
       .then(response => {
         console.log("response is:", response);
-
+        setShoppingList(response.data)
         console.log("response data is:", response.data);
       })
       .catch(err => {
