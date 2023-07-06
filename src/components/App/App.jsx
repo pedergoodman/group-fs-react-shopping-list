@@ -59,7 +59,19 @@ function App() {
         alert("ERROR in POST:", error);
       });
   };
-
+  const removeShopItem = (shopId) => {
+    axios.delete(`/shopping-list/${shopId}`)
+    .then((response) => {
+      getShoppingList();
+    }).catch((error) => {
+        console.log('ERROR:',error);
+        alert('ERROR in DELETE:', error)
+    })
+    .catch(error => {
+      console.log("ERROR:", error);
+      alert("ERROR in DELETE:", error);
+    });
+};
 
 
     // Build App!
@@ -71,7 +83,7 @@ function App() {
              <ShopForm addShopItem={postShoppingList}/>
               <Title title="Shopping List"/> 
             </main>
-            <ShopList shoppingList={shoppingList}/>
+            <ShopList shoppingList={shoppingList} removeShopItems={removeShopItem}/>
         </div>
     );
 }

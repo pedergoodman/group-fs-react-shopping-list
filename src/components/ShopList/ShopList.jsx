@@ -2,7 +2,10 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import ShopItem from '../ShopItem/ShopItem'
 import './shopList.css'
-const ShopList = ({shoppingList}) => {
+const ShopList = ({shoppingList, removeShopItems}) => {
+  
+
+  
   return (
     <>
     <div className='buttonDiv'>
@@ -10,7 +13,7 @@ const ShopList = ({shoppingList}) => {
       <Button variant ="danger">Clear</Button>
     </div>
     {shoppingList.map(shoppingItem => 
-        <ShopItem key={shoppingItem.id} shoppingItem={shoppingItem}/>
+        <ShopItem key={shoppingItem.id} shoppingItem={shoppingItem} removeShopItem={removeShopItems}/>
       )}
     </>
   )

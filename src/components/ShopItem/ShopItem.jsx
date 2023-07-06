@@ -2,11 +2,15 @@ import React from 'react'
 import { Card, Col } from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import './shopItem.css'
-const ShopItem = ({shoppingItem}) => {
+const ShopItem = ({shoppingItem, removeShopItem}) => {
 
   if (shoppingItem.isPurchased == true) {
       
   }
+ const handleDelete = () => {
+   removeShopItem(shoppingItem.id);
+   console.log('Remove!');
+ }
 
   return (
             <div className='cardDiv'>
@@ -18,7 +22,7 @@ const ShopItem = ({shoppingItem}) => {
               </Card.Text>
               <span className='purchaseArea'>
               <Button variant='success' size="sm" className='buyButton'>Buy</Button>
-              <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
+              <Button variant='danger' size="sm" className='removeButton' onClick={handleDelete}>Remove</Button>
               </span>
             </Card.Body>
           </Card>
