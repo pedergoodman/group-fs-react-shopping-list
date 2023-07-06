@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Header from '../Header/Header.jsx'
+import Title from '../Title/Title.jsx';
 import './App.css';
 
 
@@ -9,7 +10,9 @@ function App() {
         <div className="App">
             <Header />
             <main>
-                <p>Under Construction...</p>
+              <Title title="Add an Item"/>  
+              {/* Form in Progress */}
+              <Title title="Shopping List"/> 
             </main>
         </div>
     );
