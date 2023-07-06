@@ -68,7 +68,6 @@ router.put('/', (req, res) => {
     UPDATE "shop"
     SET "isPurchased" = false
   `
-
   pool.query(sqlText)
   .then((result) => {
     res.sendStatus(200)
@@ -95,5 +94,17 @@ router.delete('/:id', (req, res) => {
   })
 })
 // DElete route -- remove all items!
+router.delete('/', (req, res) => {
+  const sqlText = `
+    DELETE FROM "shop"
+  `
+  pool.query(sqlText)
+  .then((result) => {
+    res.sendStatus(200)
+  }).catch((err) => {
+    alert('Error deleting all items')
+    res.sendStatus(500)
+  });
+})
 
 module.exports = router;

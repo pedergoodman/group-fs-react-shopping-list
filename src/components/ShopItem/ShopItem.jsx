@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import "./shopItem.css";
 const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
@@ -19,11 +19,11 @@ const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
 
 
   if (shoppingItem.isPurchased == true) {
-  purchaseAreaDisplay = (<><p>Purchased!</p>
+  purchaseAreaDisplay = (<><p>Purchased!</p> <Button variant='danger' size="sm" className='removeButton' onClick={handleDelete}>Remove</Button>
             </>)
   } else {
   purchaseAreaDisplay = (<><Button variant='success' size="sm" className='buyButton' onClick={handleBuyButton}>Buy</Button>
-            <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
+            <Button variant='danger' size="sm" className='removeButton' onClick={handleDelete}>Remove</Button>
             </>)
   }
 

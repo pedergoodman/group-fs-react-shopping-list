@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import ShopItem from "../ShopItem/ShopItem";
-import { Container } from "react-bootstrap";
 import "./shopList.css";
 
 const ShopList = ({
@@ -9,11 +8,17 @@ const ShopList = ({
   resetPurchases,
   updatePurchaseStatus,
   removeShopItems,
+  clearPurchases,
 }) => {
   const handleResetButton = () => {
     console.log("reset button clicked");
     resetPurchases();
   }; // end handleResetButton
+
+  const handleClearButton = () => {
+    console.log("clear Button Pressed")
+    clearPurchases()
+  }
 
   return (
     <>
@@ -25,7 +30,7 @@ const ShopList = ({
         >
           Reset
         </Button>
-        <Button variant="danger" className="clearButton">
+        <Button variant="danger" className="clearButton" onClick={handleClearButton}>
           Clear
         </Button>
       </div>

@@ -55,6 +55,18 @@ function App() {
       });
   }; // end resetPurchases
 
+  const clearPurchases = () => {
+    axios
+      .delete(`/shopping-list`)
+      .then(response => {
+        getShoppingList();
+      })
+      .catch(err => {
+        alert("Error deleting purchase");
+        console.log("Error deleting purchase", err);
+      });
+  }; 
+
   const postShoppingList = addShopItem => {
     axios({
       method: "POST",
@@ -102,6 +114,7 @@ function App() {
       <ShopList
         shoppingList={shoppingList}
         resetPurchases={resetPurchases}
+        clearPurchases={clearPurchases}
         updatePurchaseStatus={updatePurchaseStatus}
         removeShopItems={removeShopItem}
       />
