@@ -1,7 +1,8 @@
 .cardDiv{
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .buyButton {

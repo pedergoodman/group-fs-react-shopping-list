@@ -6,12 +6,14 @@ const ShopList = ({shoppingList}) => {
   return (
     <>
     <div className='buttonDiv'>
-      <Button variant="warning">Reset</Button>
-      <Button variant ="danger">Clear</Button>
+      <Button variant="warning" className='resetButton'>Reset</Button>
+      <Button variant ="danger" className='clearButton'>Clear</Button>
     </div>
+    <div className='shoppingListDiv'>
     {shoppingList.map(shoppingItem => 
         <ShopItem key={shoppingItem.id} shoppingItem={shoppingItem}/>
       )}
+      </div>
     </>
   )
 }
