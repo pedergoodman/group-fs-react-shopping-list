@@ -6,8 +6,6 @@ import Title from '../Title/Title.jsx';
 import './App.css';
 import ShopList from '../ShopList/ShopList.jsx';
 
-
-
 function App() {
 
     const [ shoppingList, setShoppingList ] = useState([]);
