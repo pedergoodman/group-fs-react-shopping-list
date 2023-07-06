@@ -1,50 +1,75 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
-const pool = require('../modules/pool')
-
-
+const pool = require("../modules/pool");
 
 // GET route -- load list, sort by purchased, then by Alphabetical
-router.get('/', (req, res) => {
-
+router.get("/", (req, res) => {
   // select all items, ordered by isPurchased first (false should come first)
-  // then by item, We can change ASC or DES later if needed. 
-  const sqlText = `SELECT * FROM "shop" ORDER BY "isPurchased", "item"`
+  // then by item, We can change ASC or DES later if needed.
+  const sqlText = `SELECT * FROM "shop" ORDER BY "isPurchased", "item"`;
 
-  pool.query(sqlText)
-    .then((result) => {
-      console.log('DB items received!');
+  pool
+    .query(sqlText)
+    .then(result => {
+      console.log("DB items received!");
 
       // rows grabbed with results.rows
-      res.send(result.rows)
-    }).catch((err) => {
-      console.log(`Error making DB query, ${sqlText}`, err );
-      res.sendStatus(500)
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log(`Error making DB query, ${sqlText}`, err);
+      res.sendStatus(500);
     });
-
 }); // end GET route
 
-
-
-
 // POST route
-
+router.post("/", (req, res) => {
+  // Request the data they send
+  const shop = req.body;
+  // USE PARAMETERIZATIONS
+  const sqlShopPost = `INSERT INTO "shop" (item, quantity, unit) VALUES ($1, $2, $3)`;
+  const sqlParam = [shop.item, shop.quantity, shop.unit];
+  // Query to the database
+  pool.query(sqlShopPost, [shop.item, shop.quantity, shop.unit])
+  .then((result) => {
+    console.log('Added item to the shopping list:', shop)
+    // Send an - OK Status in Postman
+    res.sendStatus(201);
+  }).catch((error) => {
+    console.log(`Error in ${sqlShopPost}:`, error);
+     // Send an - ERROR Status in Postman
+    res.sendStatus(500);
+  })
+});
 
 // PUT route -- change isPurchased status to True
+router.put('/:id', (req, res) => {
+  const idToUpdate = req.params.id
+  const sqlText = `
+    UPDATE "shop"
+    SET "isPurchased" = true
+    WHERE id=$1
+  `
+
+  pool.query(sqlText, [idToUpdate])
+  .then((result) => {
+    
+    res.sendStatus(200)
+  }).catch((err) => {
+    alert('Error Updating "buy" item')
+    res.sendStatus(500)
+  });
+
+
+}) // end PUT - isPurchased update
 
 
 // PUT route -- reset ALL isPurchased statuses to False
 
-
-// PUT route (stretch) -- rename shopping list item 
-
+// PUT route (stretch) -- rename shopping list item
 
 // DELETE route -- remove selected item
 
-
 // DElete route -- remove all items!
-
-
-
 
 module.exports = router;

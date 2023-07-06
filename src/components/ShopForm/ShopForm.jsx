@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ShopForm = () => {
+const ShopForm = ({addShopItem}) => {
   // STATES
   const [shopItem, setShopItem] = useState("");
   const [shopQuantity, setShopQuatity] = useState("");
@@ -10,6 +10,13 @@ const ShopForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("Submitted!");
+
+    // Post the Data
+    addShopItem({
+      item:shopItem,
+      quantity:shopQuantity,
+      unit:shopUnit
+    })
     // Empty the values
     setShopItem("");
     setShopQuatity("");
