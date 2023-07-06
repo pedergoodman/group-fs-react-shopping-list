@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 const ShopForm = ({addShopItem}) => {
   // STATES
@@ -28,31 +29,30 @@ const ShopForm = ({addShopItem}) => {
   // console.log('Shop Quantity:', shopQuantity);
   // console.log('Shop Unit:', shopUnit);
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Item:</label>
-      <input
-        type="text"
-        onChange={event => setShopItem(event.target.value)}
-        value={shopItem}
-      />
+    <Form onSubmit={handleSubmit}>
+    <Form.Group className="mb-3" controlId="formItem">
+      <Form.Label>Item:</Form.Label>
+      <Form.Control type="text" placeholder="Enter an Item" onChange={event => setShopItem(event.target.value)} value={shopItem} />
+    </Form.Group>
 
-      <div>
-        <label>Quantity:</label>
-        <input
-          type="number"
-          onChange={event => setShopQuatity(event.target.value)}
-          value={shopQuantity}
-        />
+    <Form.Group className="mb-3" controlId="quantityForm">
+      <Form.Label>Quantity</Form.Label>
+      <Form.Control type="number" placeholder="Enter Quantity"onChange={event => setShopQuatity(event.target.value)}
+        value={shopQuantity} />
+    </Form.Group>
 
-        <label>Unit:</label>
-        <input
-          type="text"
-          onChange={event => setShopUnit(event.target.value)}
-          value={shopUnit}
-        />
-      </div>
-      <button type="submit">Save</button>
-    </form>
+
+    <Form.Group className="mb-3" controlId="unitForm">
+      <Form.Label>Unit</Form.Label>
+      <Form.Control type="text" placeholder="Enter Unit of Measurement"onChange={event => setShopUnit(event.target.value)}
+        value={shopUnit} />
+    </Form.Group>
+    
+    <Button variant="success" type="submit">
+      Submit
+    </Button>
+
+  </Form>
   );
 };
 
