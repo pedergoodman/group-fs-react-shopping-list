@@ -1,7 +1,15 @@
 import React from 'react'
 import { Card, Col } from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
-const ShopItem = ({shoppingItem}) => {
+const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
+
+
+  const handleBuyButton = () => {
+    console.log('buy button clicked!');
+    updatePurchaseStatus(shoppingItem.id)
+  } //end handleBuyButton
+
+
 
   if (shoppingItem.isPurchased == true) {
       
@@ -15,7 +23,7 @@ const ShopItem = ({shoppingItem}) => {
                {shoppingItem.quantity}:{shoppingItem.unit}
               </Card.Text>
               <span className='purchaseArea'>
-              <Button variant='success'>Buy</Button>
+              <Button variant='success' onClick={handleBuyButton}>Buy</Button>
               <Button variant='danger'>Remove</Button>
               </span>
             </Card.Body>

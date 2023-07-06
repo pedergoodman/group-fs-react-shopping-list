@@ -47,13 +47,25 @@ router.put('/:id', (req, res) => {
     alert('Error Updating "buy" item')
     res.sendStatus(500)
   });
-
-
 }) // end PUT - isPurchased update
 
 
 
 // PUT route -- reset ALL isPurchased statuses to False
+router.put('/', (req, res) => {
+  const sqlText = `
+    UPDATE "shop"
+    SET "isPurchased" = false
+  `
+
+  pool.query(sqlText)
+  .then((result) => {
+    res.sendStatus(200)
+  }).catch((err) => {
+    alert('Error Updating "buy" item')
+    res.sendStatus(500)
+  });
+}) // end PUT - reset all
 
 
 // PUT route (stretch) -- rename shopping list item 

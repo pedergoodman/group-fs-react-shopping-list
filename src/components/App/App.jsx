@@ -5,7 +5,6 @@ import ShopForm from '../ShopForm/ShopForm.jsx';
 import Title from '../Title/Title.jsx';
 import './App.css';
 import ShopList from '../ShopList/ShopList.jsx';
-import axios from 'axios';
 
 
 
@@ -34,9 +33,8 @@ function App() {
         getShoppingList();
     }, []);
 
-
+    // PUT request - when clicking BUY button
     const updatePurchaseStatus = (itemToUpdate) => {
-        
         axios.put(`/shopping-list/${itemToUpdate}`)
             .then((response) => {
                 getShoppingList()
@@ -45,6 +43,18 @@ function App() {
                 console.log('Error updating purchase', err);
             });
     }; // end updatePurchaseStatus
+
+
+    // PUT request - clicking reset button
+    const resetPurchases = () => {
+        axios.put(`/shopping-list`)
+            .then((response) => {
+                getShoppingList()
+            }).catch((err) => {
+                alert('Error updating purchase');
+                console.log('Error updating purchase', err);
+            });
+    }; // end resetPurchases
 
 
 
@@ -56,10 +66,10 @@ function App() {
             <Header />
             <main>
               <Title title="Add an Item"/>  
-             <ShopForm/>
+              <ShopForm/>
               <Title title="Shopping List"/> 
             </main>
-            <ShopList shoppingList={shoppingList}/>
+            <ShopList shoppingList={shoppingList} resetPurchases={resetPurchases} updatePurchaseStatus={updatePurchaseStatus} />
         </div>
     );
 }
