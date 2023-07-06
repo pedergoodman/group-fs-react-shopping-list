@@ -5,9 +5,7 @@ import ShopForm from '../ShopForm/ShopForm.jsx';
 import Title from '../Title/Title.jsx';
 import './App.css';
 import ShopList from '../ShopList/ShopList.jsx';
-
-
-
+import axios from 'axios';
 
 
 
@@ -17,11 +15,15 @@ function App() {
 
     const [ shoppingList, setShoppingList ] = useState([]);
 
+    useEffect(() => {
+        getShoppingList()
+      }, [])
+    
     const getShoppingList = () => {
         axios.get('/shopping-list')
         .then((response) => {
+            setShoppingList(response.data)
             console.log('response is:', response);
-    
             console.log('response data is:', response.data);
         }).catch((err) => {
             console.log('Error GETing shopping list:', err);
@@ -43,6 +45,7 @@ function App() {
              <ShopForm/>
               <Title title="Shopping List"/> 
             </main>
+            <ShopList shoppingList={shoppingList}/>
         </div>
     );
 }
