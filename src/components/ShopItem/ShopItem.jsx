@@ -11,10 +11,18 @@ const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
   } //end handleBuyButton
 
 
+  let purchaseAreaDisplay = ''
+
 
   if (shoppingItem.isPurchased == true) {
-      
+  purchaseAreaDisplay = (<><p>Purchased!</p>
+            </>)
+  } else {
+  purchaseAreaDisplay = (<><Button variant='success' size="sm" className='buyButton' onClick={handleBuyButton}>Buy</Button>
+            <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
+            </>)
   }
+  
 
   return (
             <div className='cardDiv'>
@@ -25,8 +33,7 @@ const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
                {shoppingItem.quantity}:{shoppingItem.unit}
               </Card.Text>
               <span className='purchaseArea'>
-              <Button variant='success' size="sm" className='buyButton' onClick={handleBuyButton}>Buy</Button>
-              <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
+              {purchaseAreaDisplay}
               </span>
             </Card.Body>
           </Card>
