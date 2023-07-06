@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header.jsx'
 import Title from '../Title/Title.jsx';
 import './App.css';
+import ShopList from '../ShopList/ShopList.jsx';
 
 
 
