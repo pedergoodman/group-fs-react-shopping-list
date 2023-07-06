@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import Header from '../Header/Header.jsx'
-import ShopForm from '../ShopForm/ShopForm.jsx';
+import ShopForm from "../ShopForm/ShopForm.jsx";
 import Title from '../Title/Title.jsx';
 import './App.css';
 import ShopList from '../ShopList/ShopList.jsx';
@@ -57,6 +57,19 @@ function App() {
     }; // end resetPurchases
 
 
+  const postShoppingList = (addShopItem) => {
+      axios({
+          method:'POST',
+          url:'/shopping-list',
+          data:addShopItem,
+      }).then((response) => {
+          getShoppingList();
+          console.log('Response:',response)
+      }).catch((error) => {
+          console.log('ERROR:',error);
+          alert('ERROR in POST:', error)
+      })
+  };
 
 
 
@@ -66,7 +79,7 @@ function App() {
             <Header />
             <main>
               <Title title="Add an Item"/>  
-              <ShopForm/>
+             <ShopForm addShopItem={postShoppingList}/>
               <Title title="Shopping List"/> 
             </main>
             <ShopList shoppingList={shoppingList} resetPurchases={resetPurchases} updatePurchaseStatus={updatePurchaseStatus} />

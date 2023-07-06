@@ -2,6 +2,8 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import ShopItem from '../ShopItem/ShopItem'
 import { Container} from 'react-bootstrap'
+import './shopList.css'
+
 const ShopList = ({shoppingList, resetPurchases, updatePurchaseStatus }) => {
   
   const handleResetButton = () => {
@@ -11,10 +13,11 @@ const ShopList = ({shoppingList, resetPurchases, updatePurchaseStatus }) => {
   
   return (
     <>
-    <div>
-      <Button variant="warning" onClick={handleResetButton}>Reset</Button>
-      <Button variant ="danger">Clear</Button>
+    <div className='buttonDiv'>
+      <Button variant="warning" className='resetButton' onClick={handleResetButton}>Reset</Button>
+      <Button variant ="danger" className='clearButton'>Clear</Button>
     </div>
+    <div className='shoppingListDiv'>
     {shoppingList.map(shoppingItem => 
         <ShopItem 
           key={shoppingItem.id}
@@ -22,6 +25,7 @@ const ShopList = ({shoppingList, resetPurchases, updatePurchaseStatus }) => {
           updatePurchaseStatus={updatePurchaseStatus}
         />
       )}
+      </div>
     </>
   )
 }

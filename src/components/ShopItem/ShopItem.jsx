@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Col } from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
+import './shopItem.css'
 const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
 
 
@@ -16,6 +17,7 @@ const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
   }
 
   return (
+            <div className='cardDiv'>
               <Card>
               <Card.Body>
               <Card.Title>{shoppingItem.item}</Card.Title>
@@ -23,11 +25,12 @@ const ShopItem = ({shoppingItem, updatePurchaseStatus}) => {
                {shoppingItem.quantity}:{shoppingItem.unit}
               </Card.Text>
               <span className='purchaseArea'>
-              <Button variant='success' onClick={handleBuyButton}>Buy</Button>
-              <Button variant='danger'>Remove</Button>
+              <Button variant='success' size="sm" className='buyButton' onClick={handleBuyButton}>Buy</Button>
+              <Button variant='danger' size="sm" className='removeButton'>Remove</Button>
               </span>
             </Card.Body>
           </Card>
+          </div>
   )
 }
 
