@@ -8,29 +8,51 @@ import ShopList from "../ShopList/ShopList.jsx";
 
 function App() {
 
-  const getShoppingList = () => {
-    axios
-      .get("/shopping-list")
-      .then(response => {
-        console.log("response is:", response);
-        setShoppingList(response.data);
-        console.log("response data is:", response.data);
-      })
-      .catch(err => {
-        console.log("Error GETing shopping list:", err);
-        alert("Error GETing shopping list");
-      });
-  }; // end getShoppingList
+    const [ shoppingList, setShoppingList ] = useState([]);
 
-  const postShoppingList = addShopItem => {
-    axios({
-      method: "POST",
-      url: "/shopping-list",
-      data: addShopItem,
-    })
-      .then(response => {
+
+    // GET request, 
+    const getShoppingList = () => {
+        axios.get('/shopping-list')
+        .then((response) => {
+            setShoppingList(response.data)
+            console.log('response is:', response);
+            console.log('response data is:', response.data);
+        }).catch((err) => {
+            console.log('Error GETing shopping list:', err);
+            alert('Error GETing shopping list')
+        });
+    }; // end getShoppingList
+
+    // Initial load of shopping list
+    useEffect( () => {
         getShoppingList();
-        console.log("Response:", response);
+    }, []);
+
+
+    const updatePurchaseStatus = (itemToUpdate) => {
+        
+        axios.put(`/shopping-list/${itemToUpdate}`)
+            .then((response) => {
+                getShoppingList()
+            }).catch((err) => {
+                alert('Error updating purchase');
+                console.log('Error updating purchase', err);
+            });
+    }; // end updatePurchaseStatus
+
+
+  const postShoppingList = (addShopItem) => {
+      axios({
+          method:'POST',
+          url:'/shopping-list',
+          data:addShopItem,
+      }).then((response) => {
+          getShoppingList();
+          console.log('Response:',response)
+      }).catch((error) => {
+          console.log('ERROR:',error);
+          alert('ERROR in POST:', error)
       })
       .catch(error => {
         console.log("ERROR:", error);
@@ -38,30 +60,20 @@ function App() {
       });
   };
 
-  const updatePurchaseStatus = itemToUpdate => {
-    axios
-      .put(`/shopping-list/${itemToUpdate}`)
-      .then(response => {
-        getShoppingList();
-      })
-      .catch(err => {
-        alert("Error updating purchase");
-        console.log("Error updating purchase", err);
-      });
-  }; // end updatePurchaseStatus
 
-  // Build App!
-  return (
-    <div className="App">
-      <Header />
-      <main>
-        <Title title="Add an Item" />
-        <ShopForm addShopItem={postShoppingList} />
-        <Title title="Shopping List" />
-      </main>
-      <ShopList shoppingList={shoppingList} />
-    </div>
-  );
+
+    // Build App!
+    return (
+        <div className="App">
+            <Header />
+            <main>
+              <Title title="Add an Item"/>  
+             <ShopForm addShopItem={postShoppingList}/>
+              <Title title="Shopping List"/> 
+            </main>
+            <ShopList shoppingList={shoppingList}/>
+        </div>
+    );
 }
 
 export default App;
