@@ -57,7 +57,7 @@ const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
         <Card.Body>
           <Card.Title>{shoppingItem.item}</Card.Title>
           <Card.Text>
-            {shoppingItem.quantity}:{shoppingItem.unit}
+            {shoppingItem.quantity} {shoppingItem.unit}
           </Card.Text>
           <span className="purchaseArea">
            {purchaseAreaDisplay}
