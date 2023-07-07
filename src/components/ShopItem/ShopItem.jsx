@@ -2,8 +2,15 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import "./shopItem.css";
+import Swal from "sweetalert2";
 const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
   const handleBuyButton = () => {
+    Swal.fire({
+      icon: 'success',
+      title: `Your item has been purchased`,
+      showConfirmButton: false,
+      timer: 1500
+    })
     console.log("buy button clicked!");
     updatePurchaseStatus(shoppingItem.id);
   }; //end handleBuyButton
@@ -11,7 +18,24 @@ const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
   if (shoppingItem.isPurchased == true) {
   }
   const handleDelete = () => {
-    removeShopItem(shoppingItem.id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This will remove the selected item!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeShopItem(shoppingItem.id);
+        Swal.fire(
+          'Deleted!',
+          'Your item has been deleted.',
+          'success'
+        )
+      }
+    })
     console.log("Remove!");
   };
 

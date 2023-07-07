@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-
+import Swal from "sweetalert2";
 const ShopForm = ({addShopItem}) => {
   // STATES
   const [shopItem, setShopItem] = useState("");
@@ -11,6 +11,13 @@ const ShopForm = ({addShopItem}) => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("Submitted!");
+
+    Swal.fire({
+      icon: 'success',
+      title: `Your item has been added to the list`,
+      showConfirmButton: false,
+      timer: 1000
+    })
 
     // Post the Data
     addShopItem({
