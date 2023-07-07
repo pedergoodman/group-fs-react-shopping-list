@@ -12,8 +12,25 @@ const ShopList = ({
   clearPurchases,
 }) => {
   const handleResetButton = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This will clear your purchased items!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, clear them!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        resetPurchases();
+        Swal.fire(
+          'Cleared!',
+          'Your items have been cleared.',
+          'success'
+        )
+      }
+    })
     console.log("reset button clicked");
-    resetPurchases();
   }; // end handleResetButton
 
   const handleClearButton = () => {
