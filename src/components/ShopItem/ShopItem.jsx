@@ -36,7 +36,7 @@ const ShopItem = ({ shoppingItem, updatePurchaseStatus, removeShopItem }) => {
         )
       }
     })
-    console.log("Remove!");
+    console.log("Remove!");g
   };
 
   let purchaseAreaDisplay = ''

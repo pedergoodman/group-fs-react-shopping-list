@@ -8,8 +8,7 @@ router.get("/", (req, res) => {
   // then by item, We can change ASC or DES later if needed.
   const sqlText = `SELECT * FROM "shop" ORDER BY "isPurchased", "item"`;
 
-  pool
-    .query(sqlText)
+  pool.query(sqlText)
     .then(result => {
       console.log("DB items received!");
 
